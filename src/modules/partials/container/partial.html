@@ -1,0 +1,21 @@
+<template>
+    <div class="partial">
+        <div class="greeting">
+            Hello {callerName}, my name is {calleeName}. Guess what, I'm calling
+            you from within a partial!
+        </div>
+        <div class="callback">
+            Click&nbsp;
+            <a
+                href="javascript:void(0);"
+                style="text-decoration: underline"
+                onclick={handleClick}
+                data-value={calleeName}
+                >here</a
+            >
+            &nbsp;if you want me to call you back.
+        </div>
+        <div class="calls-callee">I already called you {calleeCalls} time(s).</div>
+        <div class="calls-caller">You already called me {callerCalls} time(s).</div>
+    </div>
+</template>

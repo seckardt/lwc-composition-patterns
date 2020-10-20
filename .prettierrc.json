@@ -1,0 +1,25 @@
+{
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "tabWidth": 4,
+  "useTabs": false,
+  "semi": true,
+  "printWidth": 80,
+  "arrowParens": "always",
+  "quoteProps": "as-needed",
+  "bracketSpacing": true,
+  "overrides": [
+    {
+      "files": "**/*.json",
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "**/*.html",
+      "options": {
+        "parser": "lwc"
+      }
+    }
+  ]
+}

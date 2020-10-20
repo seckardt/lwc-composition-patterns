@@ -1,0 +1,76 @@
+{
+    "name": "@seckardt/lwc-composition-patterns",
+    "version": "0.0.0",
+    "description": "Showcase for Lightning Web Components (LWC) composition patterns",
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/seckardt/lwc-composition-patterns.git"
+    },
+    "keywords": [
+        "lwc"
+    ],
+    "author": "Steffen Eckardt",
+    "contributors": [
+        {
+            "name": "Steffen Eckardt",
+            "url": "https://github.com/seckardt"
+        }
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/seckardt/lwc-composition-patterns/issues"
+    },
+    "homepage": "https://github.com/seckardt/lwc-composition-patterns#readme",
+    "dependencies": {
+        "lwc": "1.8.6"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "7.12.1",
+        "@babel/eslint-plugin": "7.12.1",
+        "@types/jest": "26.0.14",
+        "@typescript-eslint/eslint-plugin": "4.4.1",
+        "@typescript-eslint/parser": "4.4.1",
+        "compression": "1.7.4",
+        "eslint": "7.11.0",
+        "eslint-plugin-prettier": "3.1.4",
+        "express": "4.17.1",
+        "helmet": "4.1.1",
+        "husky": "4.3.0",
+        "lint-staged": "10.4.2",
+        "lwc-services": "2.2.2",
+        "kagekiri": "1.4.0",
+        "prettier": "2.1.2",
+        "typescript": "4.0.3"
+    },
+    "engines": {
+        "node": ">=10.13.0",
+        "npm": ">=6.4.1",
+        "yarn": ">=1.9.4"
+    },
+    "scripts": {
+        "build": "lwc-services build -m production",
+        "build:dev": "lwc-services build",
+        "format": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
+        "format:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
+        "lint": "eslint 'src/**/*.{js,ts}'",
+        "serve": "node scripts/server.js",
+        "test": "lwc-services test:unit",
+        "watch": "lwc-services watch"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "**/*.{css,html,js,json,md,ts,yaml,yml}": [
+            "prettier --write",
+            "git add"
+        ],
+        "./src/**/*.ts": [
+            "eslint --fix",
+            "git add"
+        ]
+    }
+}

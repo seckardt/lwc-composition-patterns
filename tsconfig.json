@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "lib": ["es2020", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "paths": {
+      "lwc": [
+        "node_modules/@lwc/engine",
+        "node_modules/@lwc/engine/types",
+        "node_modules/lwc"
+      ],
+      "types/*": ["src/types/*"],
+      "x/app": ["src/modules/x/app/app.ts"]
+    },
+    "sourceMap": true,
+    "strict": true,
+    "target": "es5"
+  },
+  "include": ["src/**/*.ts"]
+}

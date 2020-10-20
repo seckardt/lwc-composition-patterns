@@ -1,0 +1,42 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "@salesforce/eslint-config-lwc/recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "jest/globals": true,
+    "node": true,
+    "es6": true
+  },
+  "ignorePatterns": ["node_modules/", "dist/", "coverage/", "lib/"],
+  "plugins": ["@babel", "prettier"],
+  "rules": {
+    "@babel/semi": "error",
+    "prettier/prettier": "error",
+    "no-console": "error",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-unused-expressions": [
+      "error",
+      { "allowShortCircuit": true, "allowTernary": true }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "eslint:recommended",
+        "@salesforce/eslint-config-lwc/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "plugins": ["@typescript-eslint", "@babel", "prettier"]
+    }
+  ]
+}

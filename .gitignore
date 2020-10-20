@@ -1,0 +1,31 @@
+# Log files
+logs/
+*.log
+
+# Standard lib folder
+lib/
+
+# Standard dist folder
+dist/
+
+# Tooling files
+node_modules/
+
+# Temp directory
+tmp/
+
+# Jest coverage folder
+coverage/
+
+# IDEs/Editors
+.idea/
+.vscode/
+
+# MacOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/

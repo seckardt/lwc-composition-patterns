@@ -1,0 +1,14 @@
+<template>
+    <partials-outlet
+        partial={partial}
+        context={partialContext}
+    ></partials-outlet>
+    <div class="container">
+        <a
+            href="javascript:void(0);"
+            data-value={partialContext.callerName}
+            onclick={handleClickCaller}
+            >Call {partialContext.calleeName}</a
+        >
+    </div>
+</template>
