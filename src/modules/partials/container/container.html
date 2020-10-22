@@ -1,8 +1,19 @@
 <template>
+    <select onchange={handleSelect}>
+        <template for:each={pairs} for:item="pair" for:index="index">
+            <option key={pair} value={index}>{pair}</option>
+        </template>
+    </select>
+
+    <hr />
+
     <partials-outlet
         partial={partial}
         context={partialContext}
     ></partials-outlet>
+
+    <hr />
+
     <div class="container">
         <a
             href="javascript:void(0);"
@@ -10,5 +21,13 @@
             onclick={handleClickCaller}
             >Call {partialContext.calleeName}</a
         >
+    </div>
+
+    <hr />
+
+    <div class="caller-message">
+        <div>I got a message for you, {partialContext.calleeName}:</div>
+        <textarea></textarea>
+        <div><button onclick={handleMessage}>Send</button></div>
     </div>
 </template>

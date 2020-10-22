@@ -15,7 +15,19 @@
             >
             &nbsp;if you want me to call you back.
         </div>
-        <div class="calls-callee">I already called you {calleeCalls} time(s).</div>
-        <div class="calls-caller">You already called me {callerCalls} time(s).</div>
+        <div class="calls-callee">
+            I already called you {calleeCalls} time(s).
+        </div>
+        <div class="calls-caller">
+            You already called me {callerCalls} time(s).
+        </div>
+
+        <template if:true={callerMessage}>
+            <hr />
+            <div class="caller-message">
+                <div>{callerName}, I received your message!</div>
+                <div><q>{callerMessage}</q></div>
+            </div>
+        </template>
     </div>
 </template>

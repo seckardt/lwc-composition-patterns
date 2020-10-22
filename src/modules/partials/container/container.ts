@@ -10,13 +10,18 @@ type Context = {
     calleeName: string;
     callerCalls: number;
     calleeCalls: number;
+    callerMessage: string;
     handleClick(event: MouseEvent): void;
 };
 
 export default class Container extends LightningElement {
-    private interval: number | undefined;
-
     private calls: { [key: string]: number } = {};
+
+    private messageTimeout: number | undefined;
+
+    readonly pairs = CALLERS.map(
+        (caller: string, idx: number) => `${caller} & ${CALLEES[idx]}`
+    );
 
     readonly partial: Template = partial;
 
@@ -26,26 +31,26 @@ export default class Container extends LightningElement {
         calleeName: CALLEES[0],
         callerCalls: 0,
         calleeCalls: 0,
+        callerMessage: '',
         handleClick: (event: MouseEvent) => this.handleClickCallee(event),
     };
 
-    connectedCallback(): void {
-        // eslint-disable-next-line @lwc/lwc/no-async-operation
-        this.interval = window.setInterval(() => {
-            const random = Math.floor(Math.random() * CALLERS.length);
-            const caller = CALLERS[random];
-            const callee = CALLEES[random];
-            this.updateContext({
-                callerName: caller,
-                calleeName: callee,
-                callerCalls: this.calls[caller] || 0,
-                calleeCalls: this.calls[callee] || 0,
-            });
-        }, 2500);
+    disconnectCallback(): void {
+        this.messageTimeout && window.clearTimeout(this.messageTimeout);
     }
 
-    disconnectedCallback(): void {
-        this.interval && window.clearInterval(this.interval);
+    handleSelect(event: Event): void {
+        const selectEl = <HTMLSelectElement>event.currentTarget;
+        const idx = parseInt(selectEl.value, 10);
+        const caller = CALLERS[idx];
+        const callee = CALLEES[idx];
+        this.updateContext({
+            callerName: caller,
+            calleeName: callee,
+            callerMessage: '',
+            callerCalls: this.calls[caller] || 0,
+            calleeCalls: this.calls[callee] || 0,
+        });
     }
 
     handleClickCaller(event: MouseEvent): void {
@@ -54,6 +59,26 @@ export default class Container extends LightningElement {
 
     handleClickCallee(event: MouseEvent): void {
         this.handleClick(event, 'calleeCalls');
+    }
+
+    handleMessage(event: MouseEvent): void {
+        const buttonEl = <HTMLButtonElement>event.currentTarget;
+        const textareaEl = <HTMLTextAreaElement>(
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            this.template.querySelector('.caller-message textarea')
+        );
+        this.updateContext({ callerMessage: textareaEl.value });
+        textareaEl.value = '';
+        textareaEl.disabled = true;
+        buttonEl.disabled = true;
+
+        // eslint-disable-next-line @lwc/lwc/no-async-operation
+        this.messageTimeout = window.setTimeout(() => {
+            this.updateContext({ callerMessage: '' });
+            textareaEl.disabled = false;
+            buttonEl.disabled = false;
+        }, 5000);
     }
 
     private handleClick(

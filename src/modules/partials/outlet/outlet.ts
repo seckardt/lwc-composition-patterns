@@ -1,11 +1,10 @@
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import type { Template } from 'types/vnode';
 import defaultTemplate from './outlet.html';
 
 type Context = { [key: string]: unknown };
 
 export default class Outlet extends LightningElement {
-    @track
     private _context: Context = {};
 
     private _partial: Template = defaultTemplate;
