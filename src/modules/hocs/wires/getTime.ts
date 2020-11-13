@@ -3,6 +3,7 @@ import {
     ValueChangedEvent,
     WireEventTarget,
 } from '@lwc/wire-service';
+import { formatDate } from 'c/utils';
 
 export default function getTime(): void {
     throw new Error('Imperative use is not supported. Use @wire(adapterId)');
@@ -17,7 +18,13 @@ register(getTime, (eventTarget: WireEventTarget) => {
 
     const emit = () =>
         eventTarget.dispatchEvent(
-            new ValueChangedEvent(new Date().toISOString())
+            new ValueChangedEvent(
+                formatDate(new Date(), {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                })
+            )
         );
 
     eventTarget.addEventListener('connect', () => {

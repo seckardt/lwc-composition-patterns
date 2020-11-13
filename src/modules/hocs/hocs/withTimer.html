@@ -1,0 +1,6 @@
+<template>
+    <div class="hocs-timer">
+        <div>The current time is: {time}.</div>
+        <hocs-dynamic-import lwc:dynamic={ctor} state={state}></hocs-dynamic-import>
+    </div>
+</template>

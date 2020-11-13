@@ -6,7 +6,6 @@ describe('partials-outlet', () => {
     let element: Outlet & HTMLElement;
 
     beforeEach(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         element = createElement('partials-outlet', {
             is: Outlet,

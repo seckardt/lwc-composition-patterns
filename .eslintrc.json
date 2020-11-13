@@ -36,7 +36,18 @@
         "plugin:@typescript-eslint/recommended"
       ],
       "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint", "@babel", "prettier"]
+      "plugins": ["@typescript-eslint", "@babel", "prettier"],
+      "rules": {
+        "@babel/semi": "error",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "prettier/prettier": "error",
+        "no-console": "error",
+        "no-empty": ["error", { "allowEmptyCatch": true }],
+        "no-unused-expressions": [
+          "error",
+          { "allowShortCircuit": true, "allowTernary": true }
+        ]
+      }
     }
   ]
 }

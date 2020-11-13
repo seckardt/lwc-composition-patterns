@@ -1,0 +1,60 @@
+<template>
+    <hocs-dynamic-import lwc:dynamic={ctor} state={state}></hocs-dynamic-import>
+
+    <footer class="slds-post__footer">
+        <ul class="slds-post__footer-actions-list slds-list_horizontal">
+            <li class="slds-col slds-item slds-m-right_medium">
+                <template if:false={state.isLiked}>
+                    <button
+                        onclick={handleClickLike}
+                        title="Like this item"
+                        class="slds-button_reset slds-post__footer-action"
+                        aria-pressed="false"
+                    >
+                        <svg
+                            class="slds-icon slds-icon-text-default slds-icon_x-small slds-align-middle"
+                            aria-hidden="true"
+                        >
+                            <use
+                                xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#like"
+                            ></use></svg
+                        >Like
+                    </button>
+                </template>
+                <template if:true={state.isLiked}>
+                    <button
+                        onclick={handleClickDislike}
+                        title="Dislike this item"
+                        class="slds-button_reset slds-post__footer-action slds-is-active"
+                        aria-pressed="true"
+                    >
+                        <svg
+                            class="slds-icon slds-icon-text-default slds-icon_x-small slds-align-middle"
+                            aria-hidden="true"
+                        >
+                            <use
+                                xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#like"
+                            ></use>
+                        </svg>
+                        Liked
+                    </button>
+                </template>
+            </li>
+        </ul>
+        <ul
+            class="slds-post__footer-meta-list slds-list_horizontal slds-has-dividers_right slds-text-title"
+        >
+            <li class="slds-item">{state.countLikes} likes</li>
+            <li class="slds-item">{state.countShares} shares</li>
+            <li class="slds-item">{state.countViews} views</li>
+        </ul>
+    </footer>
+
+    <template if:true={state.isLiked}>
+        <div class="slds-feed__item-comments">
+            <div class="slds-p-horizontal_medium slds-p-vertical_x-small">
+                <a href="javascript:void(0);">You</a> liked this company
+            </div>
+        </div>
+    </template>
+</template>

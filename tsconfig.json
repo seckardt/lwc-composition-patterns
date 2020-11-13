@@ -20,7 +20,11 @@
         "node_modules/lwc"
       ],
       "types/*": ["src/types/*"],
-      "x/app": ["src/modules/x/app/app.ts"]
+      "c/app": ["src/modules/c/app/app.ts"],
+      "c/base": ["src/modules/c/base/base.ts"],
+      "c/utils": ["src/modules/c/utils/utils.ts"],
+      "mixins/mixins": ["src/modules/mixins/mixins/mixins.ts"],
+      "hocs/hocs": ["src/modules/hocs/hocs/hocs.ts"]
     },
     "sourceMap": true,
     "strict": true,

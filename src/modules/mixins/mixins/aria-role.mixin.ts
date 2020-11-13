@@ -1,30 +1,30 @@
 import { api } from 'lwc';
-import Base from '../base/base';
+import merge from 'deepmerge';
+import Base, { Initial, getState, state, updateState } from 'c/base';
+import { coerceStringProperty } from 'c/utils';
 
-export default function AriaRoleMixin(
-    BaseElement: new (...args: unknown[]) => Base
-): new (...args: unknown[]) => Base {
+const DEFAULT_ROLE = 'article';
+const INITIAL = {
+    [state]: {
+        ariaRole: DEFAULT_ROLE,
+    },
+};
+
+export function AriaRoleMixin(BaseElement: typeof Base): typeof BaseElement {
     class AriaRole extends BaseElement {
-        private _role: string | null = null;
-
-        get defaultState(): { [key: string]: unknown } {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            const defState = super.defaultState || {};
-            return {
-                ...defState,
-                ariaRole: this._role,
-            };
+        constructor(initial: Initial = {}) {
+            super(merge(initial, INITIAL));
         }
 
         @api
-        set role(value: string | null) {
-            this._role = typeof value === 'string' ? value : null;
-            this.setState({ ariaRole: this._role });
+        set role(value: string) {
+            this[updateState]({
+                ariaRole: coerceStringProperty(value, DEFAULT_ROLE),
+            });
         }
 
-        get role(): string | null {
-            return this._role;
+        get role(): string {
+            return this[getState]('ariaRole');
         }
     }
 

@@ -1,36 +1,32 @@
-import Base from '../base/base';
+import merge from 'deepmerge';
+import Base, { Initial, state, updateState } from 'c/base';
 
-export default function HoverMixin(
-    BaseElement: new (...args: unknown[]) => Base
-): new (...args: unknown[]) => Base {
+const INITIAL = {
+    [state]: {
+        hover: false,
+    },
+};
+
+export function HoverMixin(BaseElement: typeof Base): typeof BaseElement {
     return class Hover extends BaseElement {
-        get defaultState(): { [key: string]: unknown } {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            const defState = super.defaultState || {};
-            return {
-                ...defState,
-                hover: false,
-            };
+        constructor(initial: Initial = {}) {
+            super(merge(initial, INITIAL));
         }
 
         connectedCallback(): void {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             super.connectedCallback && super.connectedCallback();
 
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             this.addEventListener('mouseenter', (): void =>
-                this.setState({
+                this[updateState]({
                     hover: true,
                 })
             );
 
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             this.addEventListener('mouseleave', (): void =>
-                this.setState({
+                this[updateState]({
                     hover: false,
                 })
             );

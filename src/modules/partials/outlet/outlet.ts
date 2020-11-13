@@ -33,7 +33,6 @@ export default class Outlet extends LightningElement {
         // pass the correct context data to the actual rendering execution.
         // @see https://github.com/salesforce/lwc/blob/master/packages/@lwc/engine-core/src/framework/secure-template.ts
         const tpl = this.partial || defaultTemplate;
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         tpl.call = (
             thisArg: unknown,

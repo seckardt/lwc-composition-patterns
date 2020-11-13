@@ -1,0 +1,17 @@
+<template>
+    <div style="width: 320px">
+        <ul class="slds-has-dividers_around-space">
+            <template for:each={state.items} for:item="item">
+                <li key={item.accountName} class="slds-item">
+                    <hocs-article
+                        company-name={item.companyName}
+                        account-name={item.accountName}
+                        account-currency={item.currency}
+                        account-value={item.accountValue}
+                        account-close-date={item.closeDate}
+                    ></hocs-article>
+                </li>
+            </template>
+        </ul>
+    </div>
+</template>

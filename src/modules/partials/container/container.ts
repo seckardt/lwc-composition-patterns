@@ -63,10 +63,9 @@ export default class Container extends LightningElement {
 
     handleMessage(event: MouseEvent): void {
         const buttonEl = <HTMLButtonElement>event.currentTarget;
-        const textareaEl = <HTMLTextAreaElement>(
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            this.template.querySelector('.caller-message textarea')
+        // @ts-ignore
+        const textareaEl = this.template.querySelector<HTMLTextAreaElement>(
+            '.caller-message textarea'
         );
         this.updateContext({ callerMessage: textareaEl.value });
         textareaEl.value = '';

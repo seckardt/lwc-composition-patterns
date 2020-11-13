@@ -6,7 +6,6 @@ describe('partials-container', () => {
     let element: Container & HTMLElement;
 
     beforeEach(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         element = createElement('partials-container', {
             is: Container,
