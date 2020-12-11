@@ -1,3 +1,4 @@
-export * from './aria-role.mixin';
-export * from './hover.mixin';
+export * from './withAriaRole';
+export * from './withHover';
+export * from './withState';
 export * from './withStore';

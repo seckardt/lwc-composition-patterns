@@ -1,8 +1,8 @@
+import { LightningElement } from 'lwc';
 import type { Template } from 'types/vnode';
-import Base from 'c/base';
 
-export function withTemplate(template: Template): typeof Base {
-    return class extends Base {
+export function withTemplate(template: Template): typeof LightningElement {
+    return class extends LightningElement {
         render(): typeof template {
             return template;
         }

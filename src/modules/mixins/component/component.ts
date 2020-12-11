@@ -1,8 +1,8 @@
 import Base from 'c/base';
-import { AriaRoleMixin, HoverMixin } from 'mixins/mixins';
+import { withAriaRole, withHover } from 'mixins/mixins';
 
-export default class Component extends AriaRoleMixin(HoverMixin(Base)) {
+export default class Component extends withAriaRole(withHover(Base)) {
     get stateJson(): string {
-        return JSON.stringify(this._state, null, 2);
+        return JSON.stringify(this.state, null, 2);
     }
 }

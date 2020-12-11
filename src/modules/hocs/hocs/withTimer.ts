@@ -1,21 +1,25 @@
-import { track, wire } from 'lwc';
-import Base from 'c/base';
+import { LightningElement, track, wire } from 'lwc';
+import { dedupeMixin } from '@open-wc/dedupe-mixin';
+import { WithState, withState } from 'mixins/mixins';
 // eslint-disable-next-line @lwc/lwc/no-unknown-wire-adapters
 import getTime from '../wires/getTime';
 import withTimerTemplate from './withTimer.html';
 
-export function withTimer(BaseElement: typeof Base): typeof BaseElement {
-    class Dynamic extends BaseElement {
-        @track
-        ctor: unknown = BaseElement;
+export const withTimer = dedupeMixin(
+    (superclass: typeof LightningElement): typeof superclass & WithState => {
+        const Ctor = withState(superclass);
+        class Dynamic extends Ctor {
+            @track
+            ctor: typeof Ctor = Ctor;
 
-        @wire(getTime)
-        time: string | null = null;
+            @wire(getTime)
+            time: string | null = null;
 
-        render(): typeof withTimerTemplate {
-            return withTimerTemplate;
+            render(): typeof withTimerTemplate {
+                return withTimerTemplate;
+            }
         }
-    }
 
-    return Dynamic;
-}
+        return Dynamic;
+    }
+);

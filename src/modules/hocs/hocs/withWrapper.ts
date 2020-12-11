@@ -1,16 +1,20 @@
-import { track } from 'lwc';
-import Base from 'c/base';
+import { LightningElement, track } from 'lwc';
+import { dedupeMixin } from '@open-wc/dedupe-mixin';
+import { withState, WithState } from 'mixins/mixins';
 import withWrapperTemplate from './withWrapper.html';
 
-export function withWrapper(BaseElement: typeof Base): typeof BaseElement {
-    class Dynamic extends BaseElement {
-        @track
-        ctor: unknown = BaseElement;
+export const withWrapper = dedupeMixin(
+    (superclass: typeof LightningElement): typeof superclass & WithState => {
+        const Ctor = withState(superclass);
+        class Dynamic extends Ctor {
+            @track
+            ctor: typeof Ctor = Ctor;
 
-        render(): typeof withWrapperTemplate {
-            return withWrapperTemplate;
+            render(): typeof withWrapperTemplate {
+                return withWrapperTemplate;
+            }
         }
-    }
 
-    return Dynamic;
-}
+        return Dynamic;
+    }
+);

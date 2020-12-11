@@ -1,4 +1,3 @@
-import { getState, state, updateState } from 'c/base';
 import { api } from 'lwc';
 import {
     coerceNumberProperty,
@@ -7,6 +6,7 @@ import {
     formatDate,
 } from 'c/utils';
 import { withLikes, withTemplate } from 'hocs/hocs';
+import { getState, state, updateState } from 'mixins/mixins';
 import html from './article.html';
 
 const DEFAULT_CURRENCY = 'USD';

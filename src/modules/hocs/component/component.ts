@@ -1,5 +1,4 @@
-import { state } from 'c/base';
-import { setStore, withStore } from 'mixins/mixins';
+import { setStore, state, withStore } from 'mixins/mixins';
 import type { Likes } from 'hocs/hocs';
 import { ID as LikesId, withTemplate, withTimer, withWrapper } from 'hocs/hocs';
 import html from './component.html';
