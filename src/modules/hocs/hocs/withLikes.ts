@@ -10,6 +10,7 @@ import {
     state,
     updateState,
     updateStore,
+    withState,
     withStore,
     WithStore,
 } from 'mixins/mixins';
@@ -43,8 +44,8 @@ export function withLikes(
         (
             superclass: typeof LightningElement & WithStore
         ): typeof superclass & WithLikes => {
-            const Ctor = withStore(superclass);
-            class Dynamic extends Ctor {
+            const Ctor = withState(superclass);
+            class Dynamic extends withStore(superclass) {
                 @track
                 ctor: typeof Ctor = Ctor;
 
@@ -53,9 +54,13 @@ export function withLikes(
                 }
 
                 handleClickLike(): void {
+                    // @ts-ignore
                     const count: number = this[getState]('countLikes');
+
+                    // @ts-ignore
                     const uid = this[getState]<string>(stateKey);
 
+                    // @ts-ignore
                     this[updateStore](ID, {
                         [uid]: {
                             isLiked: true,
@@ -65,8 +70,13 @@ export function withLikes(
                 }
 
                 handleClickDislike(): void {
+                    // @ts-ignore
                     const count: number = this[getState]('countLikes');
+
+                    // @ts-ignore
                     const uid = this[getState]<string>(stateKey);
+
+                    // @ts-ignore
                     this[updateStore](ID, {
                         [uid]: {
                             isLiked: false,
@@ -80,10 +90,12 @@ export function withLikes(
                 }
 
                 connectedCallback(): void {
+                    // @ts-ignore
                     this[observeStore](ID)
                         .pipe(
                             filter(
                                 (newState: Record<string, Likes>): boolean => {
+                                    // @ts-ignore
                                     const uid = this[getState]<string>(
                                         stateKey
                                     );
@@ -94,6 +106,7 @@ export function withLikes(
                             ),
                             map(
                                 (newState: Record<string, Likes>): Likes => {
+                                    // @ts-ignore
                                     const uid = this[getState]<string>(
                                         stateKey
                                     );
@@ -104,6 +117,7 @@ export function withLikes(
                         )
                         .subscribe((newState: Likes) => {
                             const { isLiked, count: countLikes } = newState;
+                            // @ts-ignore
                             this[updateState]({ isLiked, countLikes });
                         });
                 }

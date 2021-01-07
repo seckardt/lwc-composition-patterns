@@ -1,12 +1,12 @@
 import { LightningElement, track } from 'lwc';
 import { dedupeMixin } from '@open-wc/dedupe-mixin';
-import { withState, WithState } from 'mixins/mixins';
+import { withState } from 'mixins/mixins';
 import withWrapperTemplate from './withWrapper.html';
 
 export const withWrapper = dedupeMixin(
-    (superclass: typeof LightningElement): typeof superclass & WithState => {
+    (superclass: typeof LightningElement): typeof superclass => {
         const Ctor = withState(superclass);
-        class Dynamic extends Ctor {
+        class Dynamic extends superclass {
             @track
             ctor: typeof Ctor = Ctor;
 

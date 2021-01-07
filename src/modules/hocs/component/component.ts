@@ -50,13 +50,12 @@ const ITEMS = [
 
 const INITIAL = {
     [state]: {
-        hasItems: true,
         items: ITEMS,
     },
 };
 
-export default class Component extends withStore(
-    withTimer(withWrapper(withTemplate(html)))
+export default class Component extends withTimer(
+    withWrapper(withStore(withTemplate(html)))
 ) {
     constructor() {
         super(INITIAL);

@@ -1,14 +1,14 @@
 import { LightningElement, track, wire } from 'lwc';
 import { dedupeMixin } from '@open-wc/dedupe-mixin';
-import { WithState, withState } from 'mixins/mixins';
+import { withState } from 'mixins/mixins';
 // eslint-disable-next-line @lwc/lwc/no-unknown-wire-adapters
 import getTime from '../wires/getTime';
 import withTimerTemplate from './withTimer.html';
 
 export const withTimer = dedupeMixin(
-    (superclass: typeof LightningElement): typeof superclass & WithState => {
+    (superclass: typeof LightningElement): typeof superclass => {
         const Ctor = withState(superclass);
-        class Dynamic extends Ctor {
+        class Dynamic extends superclass {
             @track
             ctor: typeof Ctor = Ctor;
 
